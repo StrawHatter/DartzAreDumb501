@@ -2,14 +2,14 @@
 //  main.cpp
 //  Darts501
 //
-//  Created by Cordelia on 22/04/2016.
-//  Copyright © 2016 Cordelia. All rights reserved.
+//  Created by Paul Dreczkowski on 22/04/2016.
+//  Copyright © 2016 Paul Dreczkowski. All rights reserved.
 //
 
 #include <iostream>
 #include <ctime>
 #include "Darts501.h"
-//#include <windows.h>
+#include <windows.h>
 
 
 using namespace std;
@@ -29,13 +29,13 @@ int main() {
     srand(time(NULL));
     
     for (int i = 0; i < N; i++) {                                                                   // Play 10,000 sets
-        Sid.sWon = 0;
-        Joe.sWon = 0;
+        Sid.setWon = 0;
+        Joe.setWon = 0;
         
         do
         {                                                                                           // Play match
-            Sid.gWon = 0;
-            Joe.gWon = 0;
+            Sid.gameWon = 0;
+            Joe.gameWon = 0;
             do
             {                                                                                       // Play set
                 Joe.score = 501;
@@ -62,19 +62,19 @@ int main() {
                 else
                     joeStart = 1;                                                                   //If he didn't, Joe's turn is next
                 if (Sid.score == 0)                                                                 //Whoever won a game, get's it added to a counter system
-                    Sid.gWon++;
+                    Sid.gameWon++;
                 else if (Joe.score == 0)
-                    Joe.gWon++;
-            } while (Sid.gWon != 3 && Joe.gWon != 3);
-            if (Sid.gWon == 3)
-                Sid.sWon++;
-            else if (Joe.gWon == 3)
-                Joe.sWon++;
-        } while ((Sid.sWon != 7) && (Joe.sWon != 7));
-        if (Sid.sWon == 7)
-            results[Joe.sWon]++;
-        else if (Joe.sWon == 7)
-            results[Sid.sWon + 7]++;
+                    Joe.gameWon++;
+            } while (Sid.gameWon != 3 && Joe.gameWon != 3);
+            if (Sid.gameWon == 3)
+                Sid.setWon++;
+            else if (Joe.gameWon == 3)
+                Joe.setWon++;
+        } while ((Sid.setWon != 7) && (Joe.setWon != 7));
+        if (Sid.setWon == 7)
+            results[Joe.setWon]++;
+        else if (Joe.setWon == 7)
+            results[Sid.setWon + 7]++;
     }
     
     cout << "Joe:Sid    Frequency" << endl;
@@ -91,9 +91,9 @@ int main() {
     cout << "7  :  3  - %" << (float(results[10])/N)*100 << endl;
     cout << "7  :  4  - %" << (float(results[11])/N)*100 << endl;
     cout << "7  :  5  - %" << (float(results[12])/N)*100 << endl;
-    cout << "7  :  6  - %" << (float(results[13])/N)*100 << endl << endl;
+    cout << "7  :  6  - %" << (float(results[13])/N)*100 << endl;
     
-    cin.get();
+    //cin.get(); merely  keeps the console open for saving screenshot purposes
     
     return 0;
 }
